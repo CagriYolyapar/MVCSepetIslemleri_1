@@ -39,8 +39,9 @@ else
                     <td>@item.UnitPrice</td>
                     <td>@item.Amount</td>
                     <td>@item.SubTotal</td>
-                    <td>@Html.ActionLink("-", "DeleteFromCart", new { id = item.ID }, new { @class="btn btn-primary"})</td>
-                    <td>@Html.ActionLink("+", "IncreaseAmount", new {id = item.ID }, new {@class="btn btn-success"})</td>
+                    <td>@Html.ActionLink("-", "DeleteFromCart", new { id = item.ID }, new { @class = "btn btn-primary" })</td>
+                    <td>@Html.ActionLink("+", "IncreaseAmount", new { id = item.ID }, new { @class = "btn btn-success" })</td>
+                    <td>@Html.ActionLink("+", "DestroyFromCart", new { id = item.ID }, new { @class = "btn btn-success" })</td>
                 </tr>
             }
 

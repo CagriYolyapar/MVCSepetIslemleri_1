@@ -36,6 +36,22 @@ namespace MVCSepetIslemleri_1.CustomTools
         //AdetAzalt
 
         //UrunCikar
+
+        //Ödev + Geri Al butonu
+
+
+
+
+
+        public void Yoket(int id)
+        {
+            if (_sepetUrunlerim.ContainsKey(id))
+            {
+                _sepetUrunlerim.Remove(id);
+            }
+        }
+
+
         public void SepettenSil(int id)
         {
             if (_sepetUrunlerim[id].Amount > 1)
