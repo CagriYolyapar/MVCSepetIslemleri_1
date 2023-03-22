@@ -41,10 +41,18 @@ namespace MVCSepetIslemleri_1.Controllers
         
         public ActionResult AddToCart(int id)
         {
+            CartItem ci = SepeteYolla(id);
+
+            TempData["mesaj"] = $"{ci.ProductName} isimli ürün sepete eklenmiştir";
+            return RedirectToAction("ProductList");
+        }
+
+        private CartItem SepeteYolla(int id)
+        {
             Cart c = Session["scart"] == null ? new Cart() : Session["scart"] as Cart;
 
             Product eklenecekUrun = _db.Products.Find(id);
-           
+
 
             CartItem ci = new CartItem();
             ci.ProductName = eklenecekUrun.ProductName;
@@ -54,9 +62,7 @@ namespace MVCSepetIslemleri_1.Controllers
             c.SepeteEkle(ci);
 
             Session["scart"] = c;
-
-            TempData["mesaj"] = $"{ci.ProductName} isimli ürün sepete eklenmiştir";
-            return RedirectToAction("ProductList");
+            return ci;
         }
 
         public ActionResult CartPage()
@@ -77,6 +83,26 @@ namespace MVCSepetIslemleri_1.Controllers
 
             ViewBag.SepetBos = "Sepetinizde ürün bulunmamaktadır";
             return View();
+        }
+
+        public ActionResult DeleteFromCart(int id)
+        {
+            if (Session["scart"] != null)
+            {
+                Cart c = Session["scart"] as Cart;
+
+                c.SepettenSil(id);
+                if (c.Sepetim.Count == 0) Session.Remove("scart");
+                return RedirectToAction("CartPage");
+            }
+
+            return RedirectToAction("ProductList");
+        }
+
+        public ActionResult IncreaseAmount(int id)
+        {
+            SepeteYolla(id);
+            return RedirectToAction("CartPage");
         }
     }
 }

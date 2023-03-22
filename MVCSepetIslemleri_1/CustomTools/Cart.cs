@@ -33,7 +33,9 @@ namespace MVCSepetIslemleri_1.CustomTools
             }
             _sepetUrunlerim.Add(item.ID, item);
         }
+        //AdetAzalt
 
+        //UrunCikar
         public void SepettenSil(int id)
         {
             if (_sepetUrunlerim[id].Amount > 1)
